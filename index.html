@@ -12,6 +12,12 @@
 </head>
 <body>
     
+    <form id="add-form">
+        <label>Name: <input id="item-name" type="text" placeholder="Item name"></label>
+        <label>Price: <input id="item-price" type="number" step="0.01"></label>
+        <button type="submit">Add Item</button>
+    </form>
+
     <div id="cart-qty">
 
     </div>
@@ -29,8 +35,20 @@
         const itemList = document.getElementById('item-list')
         const cartQty = document.getElementById('cart-qty')
         const cartTotal = document.getElementById('cart-total')
+        const addForm = document.getElementById('add-form')
+        const itemName = document.getElementById('item-name')
+        const itemPrice = document.getElementById('item-price')
 
         const cart = [ ]
+
+        // -------------------------------------------------------
+        // Handle add form
+        addForm.onsubmit = function(e) {
+            e.preventDefault()
+            const name = itemName.value
+            const price = itemPrice.value
+            addItem(name, price)
+        }      
 
         // -------------------------------------------------------
         // Add item
@@ -38,12 +56,13 @@
             for (let i = 0; i < cart.length; i += 1){
                 if (cart[i].name === name) {
                     cart[i].qty += 1
+                    showItem()
                     return
                 }
             }
-
             const item = {name, price, qty: 1}
             cart.push(item)
+            showItem()
         }
 
         // -------------------------------------------------------
