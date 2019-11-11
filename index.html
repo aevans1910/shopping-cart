@@ -12,7 +12,14 @@
 </head>
 <body>
     
+    <ul id="item-list">
+        <!-- Cart items -->
+
+    </ul>
+
     <script>
+        const itemList = document.getElementById('item-list')
+
         const cart = [ ]
 
         // -------------------------------------------------------
@@ -35,9 +42,11 @@
 
             console.log(`You have ${getQty()} items in your cart.`)
 
+            let itemStr = ''
             for (let i = 0; i < cart.length; i += 1){
-                console.log(`- ${cart[i].name}: $${cart[i].price} x ${cart[i].qty}`)
+                itemStr += `<li> ${cart[i].name}: $${cart[i].price} x ${cart[i].qty} </li>`
             }
+            itemList.innerHTML = itemStr
 
             console.log(`Total in cart: $${getTotal()}`)
         }
