@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shopping cart</title>
+
+    <style>
+
+    </style>
+</head>
+<body>
+    
+    <script>
+        const cart = [ ]
+
+        function addItem(name, price){
+            const item = {name: name, price: price, qty: 1}
+            cart.push(item)
+        }
+
+        function showItem(){
+            console.log(`You have ${cart.length} items in your cart.`)
+        }
+
+        addItem('Apple', 0.99)
+        addItem('Orange', 1.99)
+
+        showItem()
+    </script>
+</body>
+</html>
