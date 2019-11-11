@@ -41,6 +41,15 @@
 
         const cart = [ ]
 
+        // ------------------------------------------------------- 
+        // Handle clicked on list
+        itemList.onclick = function(e){
+            if (e.target && e.target.classList.contains('remove')){
+                const name = e.target.dataset.name
+                removeItem(name)
+            }
+        }    
+
         // -------------------------------------------------------
         // Handle add form
         addForm.onsubmit = function(e) {
@@ -66,6 +75,23 @@
         }
 
         // -------------------------------------------------------
+        // Remove item
+        function removeItem(name, qty = 0){
+            for (let i = 0; i < cart.length; i += 1){
+                if (cart[i].name === name){
+                    if (qty > 0) {
+                    cart[i].qty -= 1
+                    }
+                    if (cart[i].qty < 1 || qty === 0) {
+                        cart.splice(i, 1)
+                    }
+                    showItem()
+                    return
+                }
+            }
+        }
+
+        // -------------------------------------------------------
         // Show items
         function showItem(){
 
@@ -75,7 +101,10 @@
             for (let i = 0; i < cart.length; i += 1){
                 const {name, price, qty} = cart[i]
 
-                itemStr += `<li> ${name}: $${price} x ${qty} = $${qty * price} </li>`
+                itemStr += `<li> 
+                    ${name}: $${price} x ${qty} = $${qty * price} 
+                    <button class="remove" date-name="${name}">Remove</button>
+                </li>`
             }
             itemList.innerHTML = itemStr
 
@@ -101,33 +130,6 @@
             }
             return total.toFixed(2)
         }
-
-        function removeItem(name, qty = 0){
-            for (let i = 0; i < cart.length; i += 1){
-                if (cart[i].name === name){
-                    if (qty > 0) {
-                    cart[i].qty -= 1
-                    }
-                    if (cart[i].qty < 1 || qty === 0) {
-                        cart.splice(i, 1)
-                    }
-                    return
-                }
-            }
-        }
-
-        // -------------------------------------------------------
-        addItem('Apple', 0.99)
-        addItem('Apple', 0.99)
-        addItem('Orange', 1.99)
-        addItem('Banana', 2.99)
-
-        showItem()
-
-        removeItem('Apple', 1)
-        removeItem('Banana')
-
-        showItem()
     </script>
 </body>
 </html>
