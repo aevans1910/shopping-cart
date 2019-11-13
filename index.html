@@ -11,6 +11,7 @@
             font-family: Helvetica;
             font-size: 16px;
         }
+
         .container {
             width: 800px;
             margin: auto;
@@ -20,6 +21,40 @@
             margin: 0;
             padding: 0;
             list-style: none;
+        }
+        input, button {
+            padding: 0.5em;
+            font-size: 1em;
+            border: 1px solid;
+            border-radius: 0.25em;
+        }
+
+        button {
+            background-color: orange;
+            color: white;
+            min-width: 2.2em;
+        }
+
+        #cart-qty {
+            display: flex;
+            margin: 0.5em;
+        }
+
+        #item-list {
+            display: flex;
+            margin: 0.5em;
+        }
+
+        #item-list > li {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #cart-total {
+           font-size: 2em;
+           border-top: 1px solid; 
         }
     </style>
 </head>
@@ -149,11 +184,15 @@
                 const {name, price, qty} = cart[i]
 
                 itemStr += `<li> 
-                    ${name}: $${price} x ${qty} = $${(qty * price).toFixed(2)} 
-                    <button class="remove" data-name="${name}">Remove</button>
-                    <button class="add-one" data-name="${name}">+</button>
-                    <button class="remove-one" data-name="${name}">-</button>
-                    <input class="update" type="number" data-name="${name}">
+                    <span>
+                        ${name}: $${price} x ${qty} = $${(qty * price).toFixed(2)} 
+                    </span>
+                    <span>
+                        <button class="remove" data-name="${name}">Remove</button>
+                        <button class="add-one" data-name="${name}">+</button>
+                        <button class="remove-one" data-name="${name}">-</button>
+                        <input class="update" type="number" data-name="${name}">
+                    <span>
                 </li>`
             }
             itemList.innerHTML = itemStr
